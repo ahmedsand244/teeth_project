@@ -409,9 +409,8 @@ export default function QueueBoard({
                               visit_type_display: app.visit_type_display,
                               paid_amount: paid,
                               remaining_amount: remaining,
-                              total_amount: app.invoice?.total_amount || 0,
-                              clinic_name: user?.clinic_name || 'عيادة الأسنان المتخصصة',
-                              clinic_phone: user?.clinic_phone || '01011079572',
+                              clinic_name: user?.clinic_info?.name || user?.clinic_name || 'عيادة الأسنان المتخصصة',
+                              clinic_phone: user?.clinic_info?.phone || user?.clinic_phone || '01011079572',
                             })}
                             className="p-1.5 bg-teal-50 hover:bg-teal-100 text-teal-700 rounded-lg transition border border-teal-200"
                             title="طباعة التذكرة ومشاركة الرابط"

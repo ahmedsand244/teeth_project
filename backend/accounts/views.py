@@ -373,3 +373,38 @@ class ChangePasswordView(APIView):
         return Response({'message': 'تم تحديث كلمة المرور بنجاح ✓'}, status=status.HTTP_200_OK)
 
 
+class ClinicSettingsView(APIView):
+    """
+    Allows the clinic doctor or staff to view and update clinic settings,
+    including the clinic contact phone number displayed on tickets and medical records.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        if not request.user.clinic:
+            return Response({'error': 'المستخدم غير مرتبط بعيادة'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(ClinicSerializer(request.user.clinic).data)
+
+    def patch(self, request):
+        clinic = request.user.clinic
+        if not clinic:
+            return Response({'error': 'المستخدم غير مرتبط بعيادة'}, status=status.HTTP_400_BAD_REQUEST)
+
+        phone = request.data.get('phone')
+        name = request.data.get('name')
+        address = request.data.get('address')
+
+        if phone is not None:
+            clinic.phone = str(phone).strip()
+        if name is not None and str(name).strip():
+            clinic.name = str(name).strip()
+        if address is not None:
+            clinic.address = str(address).strip()
+
+        clinic.save()
+        return Response({
+            'message': 'تم حفظ بيانات وهاتف العيادة بنجاح ✓',
+            'clinic': ClinicSerializer(clinic).data
+        }, status=status.HTTP_200_OK)
+
+

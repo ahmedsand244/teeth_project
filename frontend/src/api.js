@@ -90,6 +90,11 @@ export const api = {
     method: 'POST',
     body: JSON.stringify(data),
   }),
+  getClinicSettings: () => request('/auth/clinic-settings/'),
+  updateClinicSettings: (data) => request('/auth/clinic-settings/', {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+  }),
   registerDoctor: (data) => request('/auth/register-doctor/', {
     method: 'POST',
     body: JSON.stringify(data),

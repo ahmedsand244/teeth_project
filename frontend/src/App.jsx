@@ -249,6 +249,21 @@ export default function App() {
         onUpdateShiftTimes={handleUpdateShiftTimes}
         onOpenStaffModal={() => setIsStaffModalOpen(true)}
         onOpenSaaSOwnerModal={() => setIsSaaSOwnerModalOpen(true)}
+        onClinicUpdated={(updatedClinic) => {
+          setUser(prev => ({
+            ...prev,
+            clinic_name: updatedClinic.name,
+            clinic_phone: updatedClinic.phone,
+            clinic_info: { ...prev.clinic_info, ...updatedClinic }
+          }));
+          setStoredUser({
+            ...user,
+            clinic_name: updatedClinic.name,
+            clinic_phone: updatedClinic.phone,
+            clinic_info: { ...user?.clinic_info, ...updatedClinic }
+          });
+          showToast('تم حفظ وتحديث رقم هاتف العيادة بنجاح ✓');
+        }}
       />
 
       {/* Content Body */}
@@ -394,8 +409,8 @@ export default function App() {
             paid_amount: inv ? inv.paid_amount : (newApp.initial_paid_amount || 0),
             remaining_amount: inv ? inv.remaining_amount : 0,
             total_amount: inv ? inv.total_amount : (newApp.initial_total_amount || 0),
-            clinic_name: user?.clinic_name || 'عيادة الأسنان المتخصصة',
-            clinic_phone: user?.clinic_phone || '01011079572',
+            clinic_name: user?.clinic_info?.name || user?.clinic_name || 'عيادة الأسنان المتخصصة',
+            clinic_phone: user?.clinic_info?.phone || user?.clinic_phone || '01011079572',
           });
         }}
       />
@@ -427,8 +442,8 @@ export default function App() {
             paid_amount: inv ? inv.paid_amount : (newApp.initial_paid_amount || 0),
             remaining_amount: inv ? inv.remaining_amount : 0,
             total_amount: inv ? inv.total_amount : (newApp.initial_total_amount || 0),
-            clinic_name: user?.clinic_name || 'عيادة الأسنان المتخصصة',
-            clinic_phone: user?.clinic_phone || '01011079572',
+            clinic_name: user?.clinic_info?.name || user?.clinic_name || 'عيادة الأسنان المتخصصة',
+            clinic_phone: user?.clinic_info?.phone || user?.clinic_phone || '01011079572',
           });
         }}
       />

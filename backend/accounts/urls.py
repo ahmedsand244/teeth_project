@@ -4,7 +4,7 @@ from .views import (
     RegisterDoctorView, RegisterAssistantView, ForgotPasswordView,
     PendingAssistantsView, StaffListCreateView, StaffDetailView,
     SaaSClinicsView, SaaSRenewSubscriptionView, SaaSToggleClinicView,
-    SaaSDeleteClinicView, ChangePasswordView
+    SaaSDeleteClinicView, ChangePasswordView, ClinicSettingsView
 )
 
 urlpatterns = [
@@ -14,6 +14,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('forgot-password/', ForgotPasswordView.as_view(), name='forgot_password'),
     path('change-password/', ChangePasswordView.as_view(), name='change_password'),
+    path('clinic-settings/', ClinicSettingsView.as_view(), name='clinic_settings'),
     
     # Registration & Join Flows
     path('register-doctor/', RegisterDoctorView.as_view(), name='register_doctor'),
