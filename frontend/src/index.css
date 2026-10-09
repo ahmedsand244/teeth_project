@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-size: 15px;
+    transition: font-size 0.2s ease-in-out;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  * {
+    border-color: var(--color-slate-200, #e2e8f0);
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.01em;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+  }
+}
+
+/* Custom Scrollbar for clinical density and smoothness */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Print Optimization for Clinic Receipts, Tickets & Medical Records */
+@media print {
+  @page {
+    margin: 8mm;
+    size: auto;
+  }
+  
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .printable-card {
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+    margin: 0 auto !important;
+    background: #ffffff !important;
+    page-break-inside: avoid;
+  }
+
+  .printable-thermal {
+    max-width: 80mm !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 6mm !important;
+    border: 1px dashed #94a3b8 !important;
+    font-size: 11px !important;
+  }
+}
+
+@media screen {
+  .print-only {
+    display: none;
+  }
+}
